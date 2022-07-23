@@ -1,4 +1,3 @@
-from distutils.command.config import config
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -7,8 +6,9 @@ from selenium.webdriver.common.keys import Keys
 import yaml
 import time
 import logging
+import os
 
-CONFIG_PATH=['config.yml'] # 若此项为空, 则读取下列配置
+CONFIG_PATH="./config/" # 若此项为空, 则读取下列配置
 HEADLESS = False
 
 USERNAME = ""
@@ -222,8 +222,10 @@ class Pkusubmit():
 if __name__=='__main__':
 
     p = Pkusubmit()
-    if config:
-        for i in config:
-            p.main(i)
+
+    if CONFIG_PATH:
+        for i in os.listdir(CONFIG_PATH):
+            if i[-4:]=='.yml':
+                p.main(i)
     else:
         p.main()
