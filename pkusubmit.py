@@ -187,8 +187,11 @@ class Pkusubmit():
                  ".el-col-md-24 > .is-required .el-textarea__inner"
                  ))).send_keys(f"{self.track}")
 
-        self.driver.find_element_by_class_name(
-            'el-button.el-button--primary.el-button--small').click()
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((
+                By.CLASS_NAME,
+                'el-button.el-button--primary.el-button--small'
+            ))).click()
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((
                 By.CLASS_NAME,
